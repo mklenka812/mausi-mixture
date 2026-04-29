@@ -1,0 +1,50 @@
+<section class="hero">
+  <div class="hero-bg">
+    <div class="gradient-mesh"></div>
+    <div class="spice-dots"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">🌾 Straight from Odisha's Heart</div>
+      <h1 class="hero-title">
+        <span class="title-odia">ଘରର ସ୍ୱାଦ</span>
+        <span class="title-main">The Taste of<br><em>Home</em>, Delivered.</span>
+      </h1>
+      <p class="hero-subtitle">
+        Missing Mausi's kitchen? We bring you authentic Odia namkeens, mixtures, masalas 
+        and traditional snacks — crafted with love, packed with tradition, shipped worldwide.
+      </p>
+      <div class="hero-tagline">"Wherever you go, home is just a bite away."</div>
+      <div class="hero-cta">
+        <a routerLink="/products" class="btn-primary">
+          Explore All Products
+          <span class="btn-arrow">→</span>
+        </a>
+        <a routerLink="/about" class="btn-secondary">Our Story</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-image-stack">
+        <div class="img-card img-card--back">
+          <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=80" alt="Odia Namkeen">
+        </div>
+        <div class="img-card img-card--front">
+          <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=600&q=80" alt="Mixture">
+          <div class="badge-float">⭐ #1 Bestseller<br><small>Dalma Mixture</small></div>
+        </div>
+        <div class="floating-chip chip-1">🌶️ Extra Spicy!</div>
+        <div class="floating-chip chip-2">🌿 100% Natural</div>
+        <div class="floating-chip chip-3">🚚 Ships Worldwide</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat" *ngFor="let stat of stats">
+      <span class="stat-value">{{ stat.value }}</span>
+      <span class="stat-label">{{ stat.label }}</span>
+    </div>
+  </div>
+</section>

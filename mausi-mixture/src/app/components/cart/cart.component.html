@@ -1,0 +1,42 @@
+<div class="cart-drawer">
+  <div class="cart-header">
+    <h2>🛒 Your Cart</h2>
+    <button class="close-btn" (click)="close.emit()">✕</button>
+  </div>
+
+  <div class="cart-body" *ngIf="productService.cartItems().length > 0; else emptyCart">
+    <div class="cart-item" *ngFor="let item of productService.cartItems()">
+      <img [src]="item.product.image" [alt]="item.product.name" class="item-img">
+      <div class="item-info">
+        <div class="item-name">{{ item.product.name }}</div>
+        <div class="item-weight">{{ item.product.weight }}</div>
+        <div class="item-price">₹{{ item.product.price * item.quantity }}</div>
+      </div>
+      <div class="qty-controls">
+        <button (click)="productService.updateQuantity(item.product.id, item.quantity - 1)">−</button>
+        <span>{{ item.quantity }}</span>
+        <button (click)="productService.updateQuantity(item.product.id, item.quantity + 1)">+</button>
+      </div>
+      <button class="remove-btn" (click)="productService.removeFromCart(item.product.id)">🗑</button>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <div class="empty-cart">
+      <div class="empty-icon">🌶️</div>
+      <p>Your cart is empty!</p>
+      <small>Add some Odia flavours to get started</small>
+    </div>
+  </ng-template>
+
+  <div class="cart-footer" *ngIf="productService.cartItems().length > 0">
+    <div class="delivery-note">🚚 Free shipping on orders above ₹499</div>
+    <div class="total">
+      <span>Total</span>
+      <span class="total-amount">₹{{ productService.cartTotal() }}</span>
+    </div>
+    <button class="checkout-btn" (click)="checkout()">
+      Proceed to Checkout →
+    </button>
+  </div>
+</div>

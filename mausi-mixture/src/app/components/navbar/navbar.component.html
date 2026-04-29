@@ -1,0 +1,34 @@
+<nav class="navbar" [class.scrolled]="isScrolled()">
+  <div class="nav-container">
+    <a routerLink="/" class="brand">
+      <div class="brand-icon">🌶️</div>
+      <div class="brand-text">
+        <span class="brand-name">Mausi Mixture</span>
+        <span class="brand-tagline">ମାଉସୀ ମିଶ୍ରଣ</span>
+      </div>
+    </a>
+
+    <ul class="nav-links" [class.open]="isMenuOpen()">
+      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="isMenuOpen.set(false)">Home</a></li>
+      <li><a routerLink="/products" routerLinkActive="active" (click)="isMenuOpen.set(false)">Products</a></li>
+      <li><a routerLink="/about" routerLinkActive="active" (click)="isMenuOpen.set(false)">Our Story</a></li>
+      <li><a routerLink="/contact" routerLinkActive="active" (click)="isMenuOpen.set(false)">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="cart-btn" (click)="toggleCart()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        <span class="cart-count" *ngIf="productService.cartCount() > 0">{{ productService.cartCount() }}</span>
+      </button>
+      <button class="hamburger" (click)="toggleMenu()" [class.open]="isMenuOpen()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<app-cart *ngIf="isCartOpen()" (close)="closeCart()"></app-cart>
+<div class="cart-overlay" *ngIf="isCartOpen()" (click)="closeCart()"></div>

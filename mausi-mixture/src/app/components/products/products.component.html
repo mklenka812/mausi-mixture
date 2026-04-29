@@ -1,0 +1,69 @@
+<section class="products-section">
+  <div class="container">
+    <div class="section-header" *ngIf="showTitle">
+      <div class="section-label">🛒 Our Products</div>
+      <h2 class="section-title">Odisha in Every Bite</h2>
+      <p class="section-desc">From crunchy namkeens to aromatic masalas — everything your Odia heart craves, delivered worldwide.</p>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="category-tabs">
+      <button
+        *ngFor="let cat of categories"
+        class="cat-tab"
+        [class.active]="selectedCategory() === cat.id"
+        (click)="selectCategory(cat.id)"
+      >
+        <span class="cat-icon">{{ cat.icon }}</span>
+        <span class="cat-name">{{ cat.name }}</span>
+      </button>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="products-grid">
+      <div class="product-card" *ngFor="let product of displayedProducts">
+        <div class="card-image">
+          <img [src]="product.image" [alt]="product.name" loading="lazy">
+          <div class="card-badge" *ngIf="product.badge">{{ product.badge }}</div>
+          <div class="veg-mark" [class.nonveg]="!product.isVeg">
+            <span></span>
+          </div>
+          <div class="card-overlay">
+            <button class="quick-add" (click)="addToCart(product)" [class.added]="addedProductId() === product.id">
+              {{ addedProductId() === product.id ? '✓ Added!' : '+ Add to Cart' }}
+            </button>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="product-category">{{ product.category }}</span>
+            <span class="spice-level" *ngIf="product.spiceLevel">{{ spiceEmoji(product.spiceLevel) }}</span>
+          </div>
+          <h3 class="product-name">{{ product.name }}</h3>
+          <div class="product-odia" *ngIf="product.nameOdia">{{ product.nameOdia }}</div>
+          <p class="product-desc">{{ product.desc || product.description }}</p>
+
+          <div class="card-footer">
+            <div class="price-info">
+              <span class="price">₹{{ product.price }}</span>
+              <span class="weight">/ {{ product.weight }}</span>
+            </div>
+            <button class="add-btn" (click)="addToCart(product)" [class.added]="addedProductId() === product.id">
+              <span *ngIf="addedProductId() !== product.id">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M12 5v14M5 12h14"/>
+                </svg>
+              </span>
+              <span *ngIf="addedProductId() === product.id">✓</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="no-products" *ngIf="displayedProducts.length === 0">
+      <p>🌶️ More products coming soon!</p>
+    </div>
+  </div>
+</section>
